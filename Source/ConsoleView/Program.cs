@@ -13,7 +13,32 @@ namespace ConsoleView
 
         private static void OnUpdate()
         {
-            //Console.WriteLine("Frame: " + Game.FrameCount);
+            Console.WriteLine($"Frame: {Game.FrameCount}");
+            foreach(var entity in Game.entities)
+            {
+                Console.WriteLine(entity);
+            }
+
+
+            //string input = Console.ReadLine();
+            //if(string.IsNullOrWhiteSpace(input))
+            //{
+            //    return;
+            //}
+
+            //try
+            //{
+            //    string[] args = input.Split(' ');
+            //    int unitId = int.Parse(args[0]);
+            //    int playerNumber = int.Parse(args[1]);
+            //    int positionX = int.Parse(args[2]);
+            //    int positionY = int.Parse(args[3]);
+            //    Game.SpawnUnit(unitId, playerNumber, positionX, positionY);
+            //}
+            //catch(Exception)
+            //{
+            //    // ignored
+            //}
         }
     }
 }

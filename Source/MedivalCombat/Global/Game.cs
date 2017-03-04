@@ -11,7 +11,7 @@ namespace MedivalCombat.Global
     {
         public static event Action UpdateEvent = () => { };
 
-        private const float FrameTime = 1 / 60f;
+        private const float FrameTime = 1f;
 
         public static readonly List<IEntity> entities = new List<IEntity>();
         private static readonly Queue<CreateUnitCommand> creationCommands = new Queue<CreateUnitCommand>();
@@ -20,12 +20,22 @@ namespace MedivalCombat.Global
 
         public static void Start(string unitDataPath)
         {
-            IEntity unit = UnitFactory.Create(0, 0);
-            entities.Add(unit);
-            unit = UnitFactory.Create(0, 1);
-            entities.Add(unit);
+            SpawnUnit(0, 0, 0, 4);
+            SpawnUnit(0, 1, 9, 5);
 
             MainLoop();
+        }
+
+        public static void SpawnUnit(int unitId, int playerNumber, int x, int y)
+        {
+            CreateUnitCommand command = new CreateUnitCommand
+            {
+                playerNumber = playerNumber,
+                positionX = x,
+                positionY = y,
+                unitId = unitId
+            };
+            creationCommands.Enqueue(command);
         }
 
         private static void MainLoop()
@@ -46,12 +56,13 @@ namespace MedivalCombat.Global
         private static void PerformFrame()
         {
             ++FrameCount;
-            UpdateEvent();
 
             SpawnUnits();
             Logic();
             //Combat();
             Physics();
+
+            UpdateEvent();
         }
 
         private static void SpawnUnits()
@@ -86,11 +97,11 @@ namespace MedivalCombat.Global
         {
             List<AttackCommand> attacks = new List<AttackCommand>();
 
-            for (int i = 0; i < entities.Count; i++)
+            for(int i = 0; i < entities.Count; i++)
             {
                 //entities[i].CombatUpdate();
                 ITargetDetector targetDetector = entities[i].GetComponent<ITargetDetector>();
-                if (targetDetector != null)
+                if(targetDetector != null)
                 {
                     if(targetDetector.IsInRange())
                     {
@@ -108,7 +119,7 @@ namespace MedivalCombat.Global
 
         private static void Physics()
         {
-            for (int i = 0; i < entities.Count; i++)
+            for(int i = 0; i < entities.Count; i++)
             {
                 //entities[i].PhysicsUpdate();
                 IMoveComponent mover = entities[i].GetComponent<IMoveComponent>();
@@ -121,6 +132,5 @@ namespace MedivalCombat.Global
 
             // TODO: Resolve physics.
         }
-
     }
 }

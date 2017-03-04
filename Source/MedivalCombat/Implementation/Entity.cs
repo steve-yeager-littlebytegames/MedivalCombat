@@ -51,5 +51,10 @@ namespace MedivalCombat.Implementation
 
             return null;
         }
+
+        public override string ToString()
+        {
+            return $"Name: {Name}, Team: {PlayerNumber}, Position: {PositionX}, {PositionY}";
+        }
     }
 }
