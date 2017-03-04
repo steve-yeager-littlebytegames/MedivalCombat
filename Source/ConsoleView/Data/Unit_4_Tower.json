@@ -1,0 +1,30 @@
+﻿{
+	"ID": 4,
+	"Name": "Tower",
+	"UnitType": "Building",
+	"Cost": 0,
+	"Components": [
+		{
+			"Physics": {
+				"Size": 2,
+				"Weight": -1
+			},
+			"Health": {
+				"Max": 1000
+			},
+			"Targeter": {
+				"UnitTypes": [ "Ground", "Building", "Flying" ],
+				"Range": 3
+			}
+		}
+	],
+	"States": [
+		{
+			"Attack": {
+				"Damage": 25,
+				"Windup": 0.35,
+				"Cooldown": 0.35
+			}
+		}
+	]
+}

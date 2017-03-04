@@ -1,0 +1,23 @@
+﻿{
+	"ID": 1,
+	"Name": "Fireball",
+	"UnitType": "Spell",
+	"Cost": 4,
+	"Components": [
+		{
+			"Targeter": {
+				"UnitTypes": [ "Ground", "Building", "Flying"],
+				"Range": 3
+			}
+		}
+	],
+	"States": [
+		{
+			"Attack": {
+				"Damage": 200,
+				"Windup": 3,
+				"Knockback": 1
+			}
+		}
+	]
+}

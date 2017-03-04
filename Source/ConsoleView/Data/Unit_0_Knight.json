@@ -1,0 +1,42 @@
+﻿{
+	"ID": 0, 
+	"Name": "Knight",
+	"UnitType": "Ground",
+	"Cost": 3,
+	"Components": [
+		{
+			"Physics": {
+				"Size": 1,
+				"Weight": 2
+			},
+			"Health": {
+				"Max": 500
+			},
+			"Targeter": {
+				"UnitTypes": [ "Ground", "Building" ],
+				"Range": 2
+			}
+		}
+	],
+	"States": [
+		{
+			"Move": {
+				"Speed": 1
+			}
+		},
+		{
+			"Attack": {
+				"Damage": 100,
+				"Windup": 1,
+				"Cooldown": 0.5
+			}
+		},
+		{
+			"Charge": {
+				"Windup": 2,
+				"Speed": 2,
+				"Damage": 200
+			}
+		}
+	]
+}

@@ -1,0 +1,35 @@
+﻿{
+	"ID": 2,
+	"Name": "Swordsman",
+	"UnitType": "Ground",
+	"Cost": 1,
+	"Components": [
+		{
+			"Physics": {
+				"Size": 1,
+				"Weight": 1
+			},
+			"Health": {
+				"Max": 300
+			},
+			"Targeter": {
+				"UnitTypes": [ "Ground", "Building" ],
+				"Range": 1
+			}
+		}
+	],
+	"States": [
+		{
+			"Move": {
+				"Speed": 1
+			}
+		},
+		{
+			"Attack": {
+				"Damage": 100,
+				"Windup": 0.5,
+				"Cooldown": 0.5
+			}
+		}
+	]
+}

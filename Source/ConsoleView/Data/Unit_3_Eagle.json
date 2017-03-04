@@ -1,0 +1,35 @@
+﻿{
+	"ID": 3,
+	"Name": "Eagle",
+	"UnitType": "Flying",
+	"Cost": 3,
+	"Components": [
+		{
+			"Physics": {
+				"Size": 1,
+				"Weight": 1
+			},
+			"Health": {
+				"Max": 300
+			},
+			"Targeter": {
+				"UnitTypes": [ "Ground", "Building", "Flying" ],
+				"Range": 1
+			}
+		}
+	],
+	"States": [
+		{
+			"Move": {
+				"Speed": 2
+			}
+		},
+		{
+			"Attack": {
+				"Damage": 50,
+				"Windup": 0.25,
+				"Cooldown": 0.5
+			}
+		}
+	]
+}
