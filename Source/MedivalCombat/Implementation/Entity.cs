@@ -32,6 +32,7 @@ namespace MedivalCombat.Implementation
         internal static void ResetCount()
         {
             IdCount = 1;
+            entityIds.Clear();
         }
 
         internal static IEntity GetById(uint id)

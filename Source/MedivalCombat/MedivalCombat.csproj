@@ -50,6 +50,7 @@
     <Compile Include="API\IEntity.cs" />
     <Compile Include="API\Components\ITargetDetector.cs" />
     <Compile Include="Commands\AttackCommand.cs" />
+    <Compile Include="General\Replay.cs" />
     <Compile Include="Global\CreateUnitCommand.cs" />
     <Compile Include="Global\Game.cs" />
     <Compile Include="Global\UnitFactory.cs" />

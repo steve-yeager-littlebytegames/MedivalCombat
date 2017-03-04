@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MedivalCombat.API;
 using MedivalCombat.API.Components;
 using MedivalCombat.Commands;
+using MedivalCombat.General;
 using MedivalCombat.Implementation;
 using MedivalCombat.Implementation.Components;
 
@@ -10,26 +11,13 @@ namespace MedivalCombat.Global
 {
     public static class Game
     {
-        public class CreateUnitCommandFrame
-        {
-            public readonly int frame;
-            public readonly CreateUnitCommand command;
-
-            public CreateUnitCommandFrame(int frame, CreateUnitCommand command)
-            {
-                this.frame = frame;
-                this.command = command;
-            }
-        }
-
-
         public static event Action UpdateEvent = () => { };
 
         private const float FrameTime = 1f;
 
         public static readonly List<IEntity> entities = new List<IEntity>();
-        private static readonly Queue<CreateUnitCommand> creationCommands = new Queue<CreateUnitCommand>();
-        private static readonly Queue<CreateUnitCommandFrame> playedCommands = new Queue<CreateUnitCommandFrame>();
+        private static Queue<CreateUnitCommand> creationCommands = new Queue<CreateUnitCommand>();
+        private static readonly Queue<CreateUnitCommand> playedCommands = new Queue<CreateUnitCommand>();
         private static bool isPlaying;
         private static bool isPaused;
 
@@ -45,6 +33,12 @@ namespace MedivalCombat.Global
             MainLoop();
         }
 
+        public static void Replay(Replay replay)
+        {
+            creationCommands = replay.frames;
+            Start();
+        }
+
         public static void End()
         {
             isPlaying = false;
@@ -57,6 +51,14 @@ namespace MedivalCombat.Global
             isPaused = pause;
         }
 
+        public static Replay CreateReplay()
+        {
+            return new Replay
+            {
+                frames = playedCommands
+            };
+        }
+
         public static void SpawnUnit(int unitId, int playerNumber, int x, int y)
         {
             CreateUnitCommand command = new CreateUnitCommand
@@ -64,7 +66,8 @@ namespace MedivalCombat.Global
                 playerNumber = playerNumber,
                 positionX = x,
                 positionY = y,
-                unitId = unitId
+                unitId = unitId,
+                frame = FrameCount + 1,
             };
             creationCommands.Enqueue(command);
         }
@@ -105,8 +108,13 @@ namespace MedivalCombat.Global
         {
             while(creationCommands.Count > 0)
             {
+                if(creationCommands.Peek().frame > FrameCount)
+                {
+                    break;
+                }
+
                 var command = creationCommands.Dequeue();
-                playedCommands.Enqueue(new CreateUnitCommandFrame(FrameCount, command));
+                playedCommands.Enqueue(command);
                 var unit = UnitFactory.Create(command.unitId, command.playerNumber);
                 unit.PositionX = command.positionX;
                 unit.PositionY = command.positionY;

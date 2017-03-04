@@ -1,5 +1,8 @@
 ﻿using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
+using MedivalCombat.General;
 using MedivalCombat.Global;
 
 namespace ConsoleView
@@ -48,17 +51,47 @@ namespace ConsoleView
                 Game.Pause(false);
                 return;
             }
+            if(input == "save")
+            {
+                var replay = Game.CreateReplay();
+                using(FileStream fileStream = new FileStream(@"C:\Users\Steve\Desktop\Replays\" + DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss-tt") + ".txt", FileMode.Create))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(fileStream, replay);
+                }
+                return;
+            }
+
+            if(input.StartsWith("replay"))
+            {
+                string path = input.Split(' ')[1];
+                Replay replay = Replay.Load(path);
+                Game.Replay(replay);
+                return;
+            }
 
             if (input == "l")
             {
                 isListening = true;
                 Game.UpdateEvent += OnUpdate;
+                return;
             }
 
             if (input == "p")
             {
                 isListening = false;
                 Game.UpdateEvent += OnUpdate;
+                return;
+            }
+
+            if(input == "u1")
+            {
+                Game.SpawnUnit(0, 0, 0, 0);
+                return;
+            }
+            if(input == "u2")
+            {
+                Game.SpawnUnit(0, 1, 100, 57);
                 return;
             }
 
