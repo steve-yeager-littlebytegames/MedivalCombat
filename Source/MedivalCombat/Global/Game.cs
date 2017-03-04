@@ -20,10 +20,10 @@ namespace MedivalCombat.Global
 
         public static void Start(string unitDataPath)
         {
-            //string jsonData = File.ReadAllText(unitDataPath);
-            //UnitFactory.UnitData = jsonData;
-            //IEntity entity = UnitFactory.Create(jsonData);
-            //entities.Add(entity);
+            IEntity unit = UnitFactory.Create(0, 0);
+            entities.Add(unit);
+            unit = UnitFactory.Create(0, 1);
+            entities.Add(unit);
 
             MainLoop();
         }
@@ -59,7 +59,7 @@ namespace MedivalCombat.Global
             while(creationCommands.Count > 0)
             {
                 var command = creationCommands.Dequeue();
-                var unit = UnitFactory.Create(command.unitId);
+                var unit = UnitFactory.Create(command.unitId, command.playerNumber);
                 unit.PositionX = command.positionX;
                 unit.PositionY = command.positionY;
                 entities.Add(unit);

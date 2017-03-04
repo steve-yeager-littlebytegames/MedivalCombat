@@ -18,20 +18,20 @@ namespace MedivalCombat.Global
     {
         //public static string UnitData;
 
-        public static IEntity Create(int unitId)
+        public static IEntity Create(int unitId, int playerNumber)
         {
             switch(unitId)
             {
                 case 0:
-                    return CreateKnight();
+                    return CreateKnight(playerNumber);
                 default:
                     throw new NotSupportedException();
             }
         }
 
-        private static IEntity CreateKnight()
+        private static IEntity CreateKnight(int playerNumber)
         {
-            IEntity entity = new Entity("Knight", UnitTypes.Ground);
+            IEntity entity = new Entity("Knight", UnitTypes.Ground, playerNumber);
 
             TargetDetector targetDetector = new TargetDetector(entity)
             {

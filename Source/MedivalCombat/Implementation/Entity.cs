@@ -14,10 +14,11 @@ namespace MedivalCombat.Implementation
         public int PlayerNumber { get; }
         public UnitTypes UnitType { get; }
 
-        public Entity(string name, UnitTypes unitType)
+        public Entity(string name, UnitTypes unitType, int playerNumber)
         {
             Name = name;
             UnitType = unitType;
+            PlayerNumber = playerNumber;
         }
 
         public void LogicUpdate()
