@@ -47,7 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Data\Unit_Knight.json" />
+    <None Include="Data\Unit_1_Fireball.json" />
+    <None Include="Data\Unit_4_Tower.json" />
+    <None Include="Data\Unit_3_Eagle.json" />
+    <None Include="Data\Unit_2_Swordsman.json" />
+    <None Include="Data\Unit_0_Knight.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MedivalCombat\MedivalCombat.csproj">
