@@ -22,6 +22,11 @@ namespace MedivalCombat.Implementation.Components
             int smallestDistance = int.MaxValue;
             for(int i = 0; i < Game.entities.Count; i++)
             {
+                if(Owner.PlayerNumber == Game.entities[i].PlayerNumber)
+                {
+                    continue;
+                }
+
                 if((TargetTypes & Game.entities[i].UnitType) != Game.entities[i].UnitType)
                 {
                     continue;
