@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MedivalCombat.API;
 using MedivalCombat.API.Components;
 using MedivalCombat.Commands;
+using MedivalCombat.Implementation;
 using MedivalCombat.Implementation.Components;
 
 namespace MedivalCombat.Global
@@ -20,6 +21,8 @@ namespace MedivalCombat.Global
 
         public static void Start(string unitDataPath)
         {
+            Entity.ResetCount();
+
             SpawnUnit(0, 0, 0, 4);
             SpawnUnit(0, 1, 9, 5);
 
@@ -85,7 +88,7 @@ namespace MedivalCombat.Global
                 ITargetDetector targetDetector = entities[i].GetComponent<ITargetDetector>();
                 if(targetDetector != null)
                 {
-                    if(targetDetector.Target == null)
+                    if(targetDetector.Target == Entity.NoId)
                     {
                         targetDetector.GetTarget();
                     }
@@ -126,7 +129,9 @@ namespace MedivalCombat.Global
                 if(mover != null)
                 {
                     ITargetDetector targetDetector = entities[i].GetComponent<ITargetDetector>();
-                    mover.MoveTowards(targetDetector.Target.PositionX, targetDetector.Target.PositionY);
+                    IEntity target = Entity.GetById(targetDetector.Target);
+
+                    mover.MoveTowards(target.PositionX, target.PositionY);
                 }
             }
 

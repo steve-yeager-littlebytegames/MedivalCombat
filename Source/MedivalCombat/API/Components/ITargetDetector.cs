@@ -2,7 +2,7 @@
 {
     interface ITargetDetector : IComponent
     {
-        IEntity Target { get; }
+        uint Target { get; }
 
         void GetTarget();
         bool IsInRange();

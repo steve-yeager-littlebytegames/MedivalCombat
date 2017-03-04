@@ -11,13 +11,13 @@ namespace MedivalCombat.Implementation.Components
         {
         }
 
-        public IEntity Target { get; private set; }
+        public uint Target { get; private set; }
         public UnitTypes TargetTypes { get; set; }
         public int Range { get; set; }
 
         public void GetTarget()
         {
-            Target = null;
+            Target = Entity.NoId;
 
             int smallestDistance = int.MaxValue;
             for(int i = 0; i < Game.entities.Count; i++)
@@ -38,20 +38,22 @@ namespace MedivalCombat.Implementation.Components
                 if(distance < smallestDistance)
                 {
                     smallestDistance = distance;
-                    Target = Game.entities[i];
+                    Target = Game.entities[i].Id;
                 }
             }
         }
 
         public bool IsInRange()
         {
-            if(Target == null)
+            if(Target == Entity.NoId)
             {
                 return false;
             }
 
-            int x = Math.Abs(Target.PositionX - Owner.PositionX);
-            int y = Math.Abs(Target.PositionY - Owner.PositionY);
+            IEntity target = Entity.GetById(Target);
+
+            int x = Math.Abs(target.PositionX - Owner.PositionX);
+            int y = Math.Abs(target.PositionY - Owner.PositionY);
             int distance = x + y;
             return distance <= Range;
         }

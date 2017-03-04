@@ -4,6 +4,7 @@ namespace MedivalCombat.API
 {
     public interface IEntity
     {
+        uint Id { get; }
         int PlayerNumber { get; }
         string Name { get; }
         UnitTypes UnitType { get; }
