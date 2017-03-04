@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using MedivalCombat.API;
+using MedivalCombat.API.Components;
 using MedivalCombat.Commands;
 using MedivalCombat.Implementation.Components;
 
@@ -111,7 +111,7 @@ namespace MedivalCombat.Global
             for (int i = 0; i < entities.Count; i++)
             {
                 //entities[i].PhysicsUpdate();
-                IMovement mover = entities[i].GetComponent<IMovement>();
+                IMoveComponent mover = entities[i].GetComponent<IMoveComponent>();
                 if(mover != null)
                 {
                     ITargetDetector targetDetector = entities[i].GetComponent<ITargetDetector>();

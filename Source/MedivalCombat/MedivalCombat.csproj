@@ -45,14 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Component.cs" />
+    <Compile Include="API\Components\IMoveComponent.cs" />
     <Compile Include="API\IComponent.cs" />
     <Compile Include="API\IEntity.cs" />
-    <Compile Include="API\ITargetDetector.cs" />
+    <Compile Include="API\Components\ITargetDetector.cs" />
     <Compile Include="Commands\AttackCommand.cs" />
     <Compile Include="Global\CreateUnitCommand.cs" />
     <Compile Include="Global\Game.cs" />
     <Compile Include="Global\UnitFactory.cs" />
-    <Compile Include="API\IAttackComponent.cs" />
+    <Compile Include="API\Components\IAttackComponent.cs" />
+    <Compile Include="Implementation\Components\MoveComponent.cs" />
     <Compile Include="Implementation\Components\SingleAttackComponent.cs" />
     <Compile Include="Implementation\Components\TargetDetector.cs" />
     <Compile Include="Implementation\Entity.cs" />
