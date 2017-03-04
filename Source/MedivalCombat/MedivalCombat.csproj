@@ -44,14 +44,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Component.cs" />
     <Compile Include="API\IComponent.cs" />
     <Compile Include="API\IEntity.cs" />
+    <Compile Include="API\ITargetDetector.cs" />
+    <Compile Include="Commands\AttackCommand.cs" />
     <Compile Include="Global\CreateUnitCommand.cs" />
     <Compile Include="Global\Game.cs" />
     <Compile Include="Global\UnitFactory.cs" />
+    <Compile Include="API\IAttackComponent.cs" />
+    <Compile Include="Implementation\Components\SingleAttackComponent.cs" />
+    <Compile Include="Implementation\Components\TargetDetector.cs" />
     <Compile Include="Implementation\Entity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
