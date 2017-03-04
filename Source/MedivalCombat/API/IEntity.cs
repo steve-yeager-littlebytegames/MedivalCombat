@@ -1,9 +1,12 @@
-﻿namespace MedivalCombat.API
+﻿using MedivalCombat.Global;
+
+namespace MedivalCombat.API
 {
     public interface IEntity
     {
         int PlayerNumber { get; }
         string Name { get; }
+        UnitTypes UnitType { get; }
         int PositionX { get; set; }
         int PositionY { get; set; }
 
@@ -11,7 +14,7 @@
         void PhysicsUpdate();
         void CombatUpdate();
 
-        T AddComponent<T>() where T : class, IComponent, new();
+        void AddComponent(IComponent component);
         T GetComponent<T>() where T : class, IComponent;
     }
 }

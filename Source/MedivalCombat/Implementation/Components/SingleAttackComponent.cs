@@ -4,7 +4,7 @@ using MedivalCombat.Commands;
 
 namespace MedivalCombat.Implementation.Components
 {
-    class SingleAttackComponent : Component
+    class SingleAttackComponent : Component, IAttackComponent
     {
         public SingleAttackComponent(IEntity owner)
             : base(owner)

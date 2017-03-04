@@ -13,7 +13,7 @@ namespace MedivalCombat.Global
 
         private const float FrameTime = 1 / 60f;
 
-        private static readonly List<IEntity> entities = new List<IEntity>();
+        public static readonly List<IEntity> entities = new List<IEntity>();
         private static readonly Queue<CreateUnitCommand> creationCommands = new Queue<CreateUnitCommand>();
 
         public static int FrameCount { get; private set; }
