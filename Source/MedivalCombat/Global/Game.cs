@@ -10,20 +10,44 @@ namespace MedivalCombat.Global
 {
     public static class Game
     {
+        public class CreateUnitCommandFrame
+        {
+            public readonly int frame;
+            public readonly CreateUnitCommand command;
+
+            public CreateUnitCommandFrame(int frame, CreateUnitCommand command)
+            {
+                this.frame = frame;
+                this.command = command;
+            }
+        }
+
+
         public static event Action UpdateEvent = () => { };
 
-        private const float FrameTime = 3f;
+        private const float FrameTime = 1f;
 
         public static readonly List<IEntity> entities = new List<IEntity>();
         private static readonly Queue<CreateUnitCommand> creationCommands = new Queue<CreateUnitCommand>();
+        private static readonly Queue<CreateUnitCommandFrame> playedCommands = new Queue<CreateUnitCommandFrame>();
+        private static bool isPlaying;
 
         public static int FrameCount { get; private set; }
 
-        public static void Start(string unitDataPath)
+        public static void Start()
         {
+            FrameCount = 0;
             Entity.ResetCount();
 
+            isPlaying = true;
             MainLoop();
+        }
+
+        public static void End()
+        {
+            isPlaying = false;
+            creationCommands.Clear();
+            entities.Clear();
         }
 
         public static void SpawnUnit(int unitId, int playerNumber, int x, int y)
@@ -42,7 +66,7 @@ namespace MedivalCombat.Global
         {
             DateTime lastFrame = DateTime.Now;
 
-            while(true)
+            while(isPlaying)
             {
                 DateTime current = DateTime.Now;
                 if(current - lastFrame >= TimeSpan.FromSeconds(FrameTime))
@@ -70,6 +94,7 @@ namespace MedivalCombat.Global
             while(creationCommands.Count > 0)
             {
                 var command = creationCommands.Dequeue();
+                playedCommands.Enqueue(new CreateUnitCommandFrame(FrameCount, command));
                 var unit = UnitFactory.Create(command.unitId, command.playerNumber);
                 unit.PositionX = command.positionX;
                 unit.PositionY = command.positionY;

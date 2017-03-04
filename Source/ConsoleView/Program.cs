@@ -6,10 +6,11 @@ namespace ConsoleView
 {
     public class Program
     {
+        private static bool isListening;
+
         private static void Main(string[] args)
         {
             //Game.Start(@"C:\Projects\Git\MedivalCombat\Source\ConsoleView\Data\Unit_Knight.json");
-            Task.Run(() => Game.Start(""));
 
             while(true)
             {
@@ -25,8 +26,27 @@ namespace ConsoleView
                 return;
             }
 
-            if(input == "p")
+            if(input == "start")
             {
+                Task.Run(() => Game.Start());
+                return;
+            }
+
+            if(input == "end") 
+            {
+                Game.End();
+                return;
+            }
+
+            if(input == "l")
+            {
+                isListening = true;
+                Game.UpdateEvent += OnUpdate;
+            }
+
+            if (input == "p")
+            {
+                isListening = false;
                 Game.UpdateEvent += OnUpdate;
                 return;
             }
@@ -48,7 +68,10 @@ namespace ConsoleView
 
         private static void OnUpdate()
         {
-            Game.UpdateEvent -= OnUpdate;
+            if (!isListening)
+            {
+                Game.UpdateEvent -= OnUpdate; 
+            }
             Console.WriteLine($"Frame: {Game.FrameCount}");
             foreach(var entity in Game.entities)
             {
