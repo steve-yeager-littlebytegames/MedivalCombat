@@ -31,7 +31,7 @@ namespace MedivalCombat.Global
 
         private static IEntity CreateKnight()
         {
-            IEntity entity = new Entity("Knight");
+            IEntity entity = new Entity("Knight", UnitTypes.Ground);
             TargetDetector targetDetector = new TargetDetector(entity)
             {
                 TargetTypes = UnitTypes.Ground | UnitTypes.Building,
