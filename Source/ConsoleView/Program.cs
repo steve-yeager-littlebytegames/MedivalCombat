@@ -38,7 +38,18 @@ namespace ConsoleView
                 return;
             }
 
-            if(input == "l")
+            if(input == "pause")
+            {
+                Game.Pause(true);
+                return;
+            }
+            if (input == "resume")
+            {
+                Game.Pause(false);
+                return;
+            }
+
+            if (input == "l")
             {
                 isListening = true;
                 Game.UpdateEvent += OnUpdate;

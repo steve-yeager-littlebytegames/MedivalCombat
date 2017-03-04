@@ -31,6 +31,7 @@ namespace MedivalCombat.Global
         private static readonly Queue<CreateUnitCommand> creationCommands = new Queue<CreateUnitCommand>();
         private static readonly Queue<CreateUnitCommandFrame> playedCommands = new Queue<CreateUnitCommandFrame>();
         private static bool isPlaying;
+        private static bool isPaused;
 
         public static int FrameCount { get; private set; }
 
@@ -39,6 +40,7 @@ namespace MedivalCombat.Global
             FrameCount = 0;
             Entity.ResetCount();
 
+            isPaused = false;
             isPlaying = true;
             MainLoop();
         }
@@ -48,6 +50,11 @@ namespace MedivalCombat.Global
             isPlaying = false;
             creationCommands.Clear();
             entities.Clear();
+        }
+
+        public static void Pause(bool pause)
+        {
+            isPaused = pause;
         }
 
         public static void SpawnUnit(int unitId, int playerNumber, int x, int y)
@@ -68,6 +75,11 @@ namespace MedivalCombat.Global
 
             while(isPlaying)
             {
+                if(isPaused)
+                {
+                    continue;
+                }
+
                 DateTime current = DateTime.Now;
                 if(current - lastFrame >= TimeSpan.FromSeconds(FrameTime))
                 {
