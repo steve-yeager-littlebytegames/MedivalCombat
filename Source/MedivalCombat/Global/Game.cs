@@ -12,7 +12,7 @@ namespace MedivalCombat.Global
     {
         public static event Action UpdateEvent = () => { };
 
-        private const float FrameTime = 1f;
+        private const float FrameTime = 3f;
 
         public static readonly List<IEntity> entities = new List<IEntity>();
         private static readonly Queue<CreateUnitCommand> creationCommands = new Queue<CreateUnitCommand>();
@@ -22,9 +22,6 @@ namespace MedivalCombat.Global
         public static void Start(string unitDataPath)
         {
             Entity.ResetCount();
-
-            SpawnUnit(0, 0, 0, 4);
-            SpawnUnit(0, 1, 9, 5);
 
             MainLoop();
         }
@@ -129,8 +126,12 @@ namespace MedivalCombat.Global
                 if(mover != null)
                 {
                     ITargetDetector targetDetector = entities[i].GetComponent<ITargetDetector>();
-                    IEntity target = Entity.GetById(targetDetector.Target);
+                    if(targetDetector.Target == Entity.NoId)
+                    {
+                        continue;
+                    }
 
+                    IEntity target = Entity.GetById(targetDetector.Target);
                     mover.MoveTowards(target.PositionX, target.PositionY);
                 }
             }
