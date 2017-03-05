@@ -2,9 +2,8 @@
 
 namespace MedivalCombat.API
 {
-    public interface IEntity
+    public interface IEntity : IObject
     {
-        uint Id { get; }
         int PlayerNumber { get; }
         string Name { get; }
         UnitTypes UnitType { get; }

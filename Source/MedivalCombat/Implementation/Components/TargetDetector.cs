@@ -17,7 +17,7 @@ namespace MedivalCombat.Implementation.Components
 
         public void GetTarget()
         {
-            Target = Entity.NoId;
+            Target = NoId;
 
             int smallestDistance = int.MaxValue;
             for(int i = 0; i < Game.entities.Count; i++)
@@ -45,17 +45,27 @@ namespace MedivalCombat.Implementation.Components
 
         public bool IsInRange()
         {
-            if(Target == Entity.NoId)
+            if(Target == NoId)
             {
                 return false;
             }
 
-            IEntity target = Entity.GetById(Target);
+            IEntity target = (IEntity)GetById(Target);
 
             int x = Math.Abs(target.PositionX - Owner.PositionX);
             int y = Math.Abs(target.PositionY - Owner.PositionY);
             int distance = x + y;
             return distance <= Range;
+        }
+
+        public override ISnapshot Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Load(ISnapshot save)
+        {
+            throw new NotImplementedException();
         }
     }
 }

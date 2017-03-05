@@ -32,5 +32,15 @@ namespace MedivalCombat.Implementation.Components
             int yDirection = Math.Sign(y - Owner.PositionY);
             Owner.PositionY += yDistance * yDirection;
         }
+
+        public override ISnapshot Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Load(ISnapshot save)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

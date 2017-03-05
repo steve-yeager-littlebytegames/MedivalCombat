@@ -1,6 +1,6 @@
 ﻿namespace MedivalCombat.API
 {
-    public interface IComponent
+    public interface IComponent : IObject
     {
         IEntity Owner { get; }
     }

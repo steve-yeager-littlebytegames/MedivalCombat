@@ -4,14 +4,10 @@ using MedivalCombat.Global;
 
 namespace MedivalCombat.Implementation
 {
-    public class Entity : IEntity
+    public class Entity : Object, IEntity
     {
-        public const uint NoId = 0;
-        private static uint IdCount;
-        private static readonly Dictionary<uint, IEntity> entityIds = new Dictionary<uint, IEntity>();
         private readonly List<IComponent> components = new List<IComponent>();
 
-        public uint Id { get; }
         public string Name { get; }
         public int PositionX { get; set; }
         public int PositionY { get; set; }
@@ -20,35 +16,9 @@ namespace MedivalCombat.Implementation
 
         public Entity(string name, UnitTypes unitType, int playerNumber)
         {
-            Id = IdCount;
-            ++IdCount;
-            entityIds.Add(Id, this);
-
             Name = name;
             UnitType = unitType;
             PlayerNumber = playerNumber;
-        }
-
-        internal static void ResetCount()
-        {
-            IdCount = 1;
-            entityIds.Clear();
-        }
-
-        internal static IEntity GetById(uint id)
-        {
-            if(id == NoId)
-            {
-                return null;
-            }
-
-            IEntity entity;
-            if(entityIds.TryGetValue(id, out entity))
-            {
-                return entity;
-            }
-
-            return null;
         }
 
         public void LogicUpdate()
@@ -84,7 +54,17 @@ namespace MedivalCombat.Implementation
 
         public override string ToString()
         {
-            return $"Name: {Name}, Team: {PlayerNumber}, Position: {PositionX}, {PositionY}";
+            return $"ID: {Id}, Name: {Name}, Team: {PlayerNumber}, Position: {PositionX}, {PositionY}";
+        }
+
+        public override ISnapshot Save()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Load(ISnapshot save)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
