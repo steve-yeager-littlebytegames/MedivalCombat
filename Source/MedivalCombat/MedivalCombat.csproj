@@ -63,6 +63,7 @@
     <Compile Include="Implementation\Components\SingleAttackComponent.cs" />
     <Compile Include="Implementation\Components\TargetDetector.cs" />
     <Compile Include="Implementation\Entity.cs" />
+    <Compile Include="Implementation\Snapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

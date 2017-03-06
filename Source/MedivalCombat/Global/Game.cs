@@ -4,7 +4,6 @@ using MedivalCombat.API;
 using MedivalCombat.API.Components;
 using MedivalCombat.Commands;
 using MedivalCombat.General;
-using MedivalCombat.Implementation;
 using MedivalCombat.Implementation.Components;
 using Object = MedivalCombat.API.Object;
 
@@ -102,8 +101,11 @@ namespace MedivalCombat.Global
             //Combat();
             Physics();
 
+            TakeSnapShot();
+
             UpdateEvent();
         }
+
 
         private static void SpawnUnits()
         {
@@ -183,6 +185,16 @@ namespace MedivalCombat.Global
             }
 
             // TODO: Resolve physics.
+        }
+
+        private static void TakeSnapShot()
+        {
+            List<ISnapshot> snapshots = new List<ISnapshot>(Object.allObjects.Count);
+            foreach(var obj in Object.allObjects)
+            {
+                ISnapshot snapshot = obj.Save();
+                snapshots.Add(snapshot);
+            }
         }
     }
 }
