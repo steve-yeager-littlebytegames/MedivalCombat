@@ -40,7 +40,8 @@ namespace MedivalCombat.Implementation.Components
 
         public override void Load(ISnapshot save)
         {
-            throw new NotImplementedException();
+            base.Load(save);
+            Speed = save.Get<int>("Speed");
         }
     }
 }

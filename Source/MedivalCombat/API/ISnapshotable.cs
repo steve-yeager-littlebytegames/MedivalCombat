@@ -1,6 +1,6 @@
 ﻿namespace MedivalCombat.API
 {
-    interface ISnapshotable
+    public interface ISnapshotable
     {
         ISnapshot Save();
         void Load(ISnapshot snapshot);

@@ -76,6 +76,14 @@ namespace ConsoleView
                 return;
             }
 
+            if(input.StartsWith("load"))
+            {
+                string path = input.Split(' ')[1];
+                string data = File.ReadAllText(path);
+                Game.PlaySnapshot(data);
+                return;
+            }
+
             if (input == "l")
             {
                 isListening = true;

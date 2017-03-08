@@ -2,7 +2,7 @@
 
 namespace MedivalCombat.API
 {
-    public interface IEntity : IObject
+    public interface IEntity : IObject, ISnapshotable
     {
         int PlayerNumber { get; }
         string Name { get; }
