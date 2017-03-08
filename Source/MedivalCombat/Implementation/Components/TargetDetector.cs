@@ -58,9 +58,11 @@ namespace MedivalCombat.Implementation.Components
             return distance <= Range;
         }
 
-        public override ISnapshot Save()
+        public override void Save(ISnapshot snapshot)
         {
-            throw new NotImplementedException();
+            snapshot.Add("Target", Target);
+            snapshot.Add("TargetTypes", TargetTypes);
+            snapshot.Add("Range", Range);
         }
 
         public override void Load(ISnapshot save)

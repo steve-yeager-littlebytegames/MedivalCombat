@@ -33,9 +33,9 @@ namespace MedivalCombat.Implementation.Components
             Owner.PositionY += yDistance * yDirection;
         }
 
-        public override ISnapshot Save()
+        public override void Save(ISnapshot snapshot)
         {
-            throw new NotImplementedException();
+            snapshot.Add("Speed", Speed);
         }
 
         public override void Load(ISnapshot save)

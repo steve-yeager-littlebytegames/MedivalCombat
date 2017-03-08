@@ -61,6 +61,12 @@ namespace ConsoleView
                 }
                 return;
             }
+            if(input == "snapshot")
+            {
+                var snapshot = Game.CreateSnapshot();
+                File.WriteAllText(@"C:\Users\Steve\Desktop\Snapshots\" + DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss-tt") + ".txt", snapshot);
+                return;
+            }
 
             if(input.StartsWith("replay"))
             {

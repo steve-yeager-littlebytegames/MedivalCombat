@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace MedivalCombat.API
+﻿namespace MedivalCombat.API
 {
     public interface ISnapshot
     {
-        Dictionary<string, string> Data { get; }
+        uint ObjectId { get; }
+
+        void Add(string key, object value);
+        T Get<T>(string key);
     }
 }

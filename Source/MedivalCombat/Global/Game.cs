@@ -5,6 +5,7 @@ using MedivalCombat.API.Components;
 using MedivalCombat.Commands;
 using MedivalCombat.General;
 using MedivalCombat.Implementation.Components;
+using Newtonsoft.Json;
 using Object = MedivalCombat.API.Object;
 
 namespace MedivalCombat.Global
@@ -18,6 +19,7 @@ namespace MedivalCombat.Global
         public static readonly List<IEntity> entities = new List<IEntity>();
         private static Queue<CreateUnitCommand> creationCommands = new Queue<CreateUnitCommand>();
         private static readonly Queue<CreateUnitCommand> playedCommands = new Queue<CreateUnitCommand>();
+        private static readonly Dictionary<int, List<ISnapshot>> allSnapshots = new Dictionary<int, List<ISnapshot>>();
         private static bool isPlaying;
         private static bool isPaused;
 
@@ -57,6 +59,11 @@ namespace MedivalCombat.Global
             {
                 frames = playedCommands
             };
+        }
+
+        public static string CreateSnapshot()
+        {
+            return JsonConvert.SerializeObject(allSnapshots);
         }
 
         public static void SpawnUnit(int unitId, int playerNumber, int x, int y)
@@ -101,11 +108,11 @@ namespace MedivalCombat.Global
             //Combat();
             Physics();
 
-            TakeSnapShot();
+            var snapshots = TakeSnapShot();
+            allSnapshots.Add(FrameCount, snapshots);
 
             UpdateEvent();
         }
-
 
         private static void SpawnUnits()
         {
@@ -187,7 +194,7 @@ namespace MedivalCombat.Global
             // TODO: Resolve physics.
         }
 
-        private static void TakeSnapShot()
+        private static List<ISnapshot> TakeSnapShot()
         {
             List<ISnapshot> snapshots = new List<ISnapshot>(Object.allObjects.Count);
             foreach(var obj in Object.allObjects)
@@ -195,6 +202,8 @@ namespace MedivalCombat.Global
                 ISnapshot snapshot = obj.Save();
                 snapshots.Add(snapshot);
             }
+
+            return snapshots;
         }
     }
 }

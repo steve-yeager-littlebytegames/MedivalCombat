@@ -1,10 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedivalCombat.API;
+using Newtonsoft.Json;
 
 namespace MedivalCombat.Implementation
 {
-    class Snapshot : ISnapshot
+    [Serializable]
+    public class Snapshot : ISnapshot
     {
-        public Dictionary<string, string> Data { get; } = new Dictionary<string, string>();
+        public uint ObjectId { get; set; }
+
+        [JsonProperty]
+        private readonly Dictionary<string, object> data = new Dictionary<string, object>();
+
+        public void Add(string key, object value)
+        {
+            data.Add(key, value);
+        }
+
+        public T Get<T>(string key)
+        {
+            return (T)data[key];
+        }
     }
 }

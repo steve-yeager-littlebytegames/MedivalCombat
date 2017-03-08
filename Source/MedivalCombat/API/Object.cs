@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using MedivalCombat.Implementation;
 
 namespace MedivalCombat.API
 {
@@ -9,19 +10,30 @@ namespace MedivalCombat.API
 
         public static readonly List<Object> allObjects = new List<Object>();
         private static uint objectCount;
-        public readonly uint id;
 
-        public uint Id { get { return id; } }
+        public uint Id { get; private set; }
 
         protected Object()
         {
-            id = objectCount;
+            Id = objectCount;
             ++objectCount;
             allObjects.Add(this);
         }
 
-        public abstract ISnapshot Save();
-        public abstract void Load(ISnapshot save);
+        public abstract void Save(ISnapshot snapshot);
+
+        public ISnapshot Save()
+        {
+            Snapshot snapshot = new Snapshot();
+            snapshot.ObjectId = Id;
+            Save(snapshot);
+            return snapshot;
+        }
+
+        public virtual void Load(ISnapshot save)
+        {
+            Id = save.ObjectId;
+        }
 
         public static void Reset()
         {
@@ -35,7 +47,7 @@ namespace MedivalCombat.API
                 return null;
             }
 
-            return allObjects.FirstOrDefault(o => o.id == id);
+            return allObjects.FirstOrDefault(o => o.Id == id);
         }
     }
 }
