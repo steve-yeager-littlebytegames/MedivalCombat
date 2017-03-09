@@ -62,6 +62,7 @@
     <Compile Include="Global\Game.cs" />
     <Compile Include="Global\UnitFactory.cs" />
     <Compile Include="API\Components\IAttackComponent.cs" />
+    <Compile Include="Implementation\Components\HealthComponent.cs" />
     <Compile Include="Implementation\Components\MoveComponent.cs" />
     <Compile Include="Implementation\Components\SingleAttackComponent.cs" />
     <Compile Include="Implementation\Components\TargetDetector.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MedivalCombat.Implementation;
 
@@ -6,6 +7,8 @@ namespace MedivalCombat.API
 {
     public abstract class Object : IObject
     {
+        public event Action<IObject> DestroyEvent;
+
         public const uint NoId = 0;
 
         public static readonly List<Object> allObjects = new List<Object>();
@@ -48,6 +51,11 @@ namespace MedivalCombat.API
             }
 
             return allObjects.FirstOrDefault(o => o.Id == id);
+        }
+
+        public virtual void Destroy()
+        {
+            DestroyEvent?.Invoke(this);
         }
     }
 }

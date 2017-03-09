@@ -43,6 +43,9 @@ namespace MedivalCombat.Global
             MoveComponent mover = new MoveComponent(entity) {Speed = 2};
             entity.AddComponent(mover);
 
+            HealthComponent health = new HealthComponent(entity, 100);
+            entity.AddComponent(health);
+
             return entity;
         }
     }

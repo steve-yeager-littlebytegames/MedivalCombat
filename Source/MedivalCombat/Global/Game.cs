@@ -169,7 +169,13 @@ namespace MedivalCombat.Global
                 unit.PositionX = command.positionX;
                 unit.PositionY = command.positionY;
                 entities.Add(unit);
+                unit.DestroyEvent += UnitOnDestroy;
             }
+        }
+
+        private static void UnitOnDestroy(IObject entity)
+        {
+            entities.Remove((IEntity)entity);
         }
 
         private static void Logic()
@@ -210,6 +216,19 @@ namespace MedivalCombat.Global
             }
 
             // TODO: Resolve combat.
+            foreach(var attack in attacks)
+            {
+                attack.Execute();
+            }
+
+            foreach(var entity in entities)
+            {
+                IHealth health = entity.GetComponent<IHealth>();
+                if(health.Health <= 0)
+                {
+                    entity.Destroy();
+                }
+            }
         }
 
         private static void Physics()

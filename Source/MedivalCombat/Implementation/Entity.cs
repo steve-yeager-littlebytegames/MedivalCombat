@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using MedivalCombat.API;
 using MedivalCombat.Global;
+using Object = MedivalCombat.API.Object;
 
 namespace MedivalCombat.Implementation
 {
@@ -74,6 +75,18 @@ namespace MedivalCombat.Implementation
             PositionY = save.GetInt("PositionY");
             PlayerNumber = save.GetInt("PlayerNumber");
             UnitType = (UnitTypes)save.GetInt("UnitType");
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            foreach(var component in components)
+            {
+                component.Destroy();
+            }
+
+            components.Clear();
         }
     }
 }
