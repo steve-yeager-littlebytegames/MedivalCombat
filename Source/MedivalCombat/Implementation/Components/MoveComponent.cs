@@ -41,7 +41,7 @@ namespace MedivalCombat.Implementation.Components
         public override void Load(ISnapshot save)
         {
             base.Load(save);
-            Speed = save.Get<int>("Speed");
+            Speed = save.GetInt("Speed");
         }
     }
 }

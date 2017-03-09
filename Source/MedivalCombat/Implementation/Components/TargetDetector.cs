@@ -68,9 +68,9 @@ namespace MedivalCombat.Implementation.Components
         public override void Load(ISnapshot save)
         {
             base.Load(save);
-            Target = save.Get<uint>("Target");
-            TargetTypes = save.Get<UnitTypes>("TargetTypes");
-            Range = save.Get<int>("Range");
+            Target = (uint)save.GetInt("Target");
+            TargetTypes = (UnitTypes)save.GetInt("TargetTypes");
+            Range = save.GetInt("Range");
         }
     }
 }

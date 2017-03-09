@@ -114,6 +114,12 @@ namespace MedivalCombat.Global
 
             if(isPlayingSnapshot)
             {
+                if(FrameCount == allSnapshots.Count + 1)
+                {
+                    End();
+                    return;
+                }
+
                 List<Snapshot> snapshots;
                 if(allSnapshots.TryGetValue(FrameCount, out snapshots))
                 {
@@ -126,7 +132,7 @@ namespace MedivalCombat.Global
                         }
                         else
                         {
-                            int playerNumber = snapshot.Get<int>("PlayerNumber");
+                            int playerNumber = snapshot.GetInt("PlayerNumber");
                             var unit = UnitFactory.Create(0, playerNumber);
                             entities.Add(unit);
                             unit.Load(snapshot);

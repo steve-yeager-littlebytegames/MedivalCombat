@@ -11,7 +11,7 @@ namespace MedivalCombat.Implementation
         public uint ObjectId { get; set; }
 
         [JsonProperty]
-        private readonly Dictionary<string, object> data = new Dictionary<string, object>();
+        public readonly Dictionary<string, object> data = new Dictionary<string, object>();
 
         public void Add(string key, object value)
         {
@@ -21,6 +21,11 @@ namespace MedivalCombat.Implementation
         public T Get<T>(string key)
         {
             return (T)data[key];
+        }
+
+        public int GetInt(string key)
+        {
+            return (int)(long)data[key];
         }
     }
 }

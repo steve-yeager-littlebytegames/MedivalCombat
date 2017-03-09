@@ -70,10 +70,10 @@ namespace MedivalCombat.Implementation
         {
             base.Load(save);
             Name = save.Get<string>("Name");
-            PositionX = save.Get<int>("PositionX");
-            PositionY = save.Get<int>("PositionY");
-            PlayerNumber = save.Get<int>("PlayerNumber");
-            UnitType = save.Get<UnitTypes>("UnitType");
+            PositionX = save.GetInt("PositionX");
+            PositionY = save.GetInt("PositionY");
+            PlayerNumber = save.GetInt("PlayerNumber");
+            UnitType = (UnitTypes)save.GetInt("UnitType");
         }
     }
 }
